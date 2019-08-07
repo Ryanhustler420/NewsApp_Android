@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class ArticleData {
     ArrayList<Article> articles = new ArrayList<>();
 
-    public void getNewsList() {
+    public void getNewsList(final ArticleListAsyncResponse callback) {
         String url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=" + Config.NEWS_API_KEY;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
             @Override
@@ -34,7 +34,7 @@ public class ArticleData {
                         article.setAuthore(articleObject.getString("author"));
                         article.setDescription(articleObject.getString("description"));
                         article.setTitle(articleObject.getString("title"));
-                        article.setImageUrl(articleObject.getString("url"));
+                        article.setNewsUrl(articleObject.getString("url"));
                         article.setImageUrl(articleObject.getString("urlToImage"));
                         article.setPublishedDate(articleObject.getString("publishedAt"));
 
@@ -42,7 +42,10 @@ public class ArticleData {
                         articles.add(article);
                     }
 
-                    Log.v("Articles Object: ", articles.toString());
+                    if (null != callback) {
+                        // passing to interface method
+                       callback.processFinish(articles);
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();

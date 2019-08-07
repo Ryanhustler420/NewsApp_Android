@@ -38,28 +38,28 @@ public class ArticleAdaptor extends RecyclerView.Adapter<ArticleAdaptor.ViewHold
         viewHolder.title.setText(article.getTitle());
         viewHolder.description.setText(article.getDescription());
         viewHolder.date.setText(article.getPublishedDate());
-        viewHolder.authore.setText(article.getAuthore());
+        viewHolder.author.setText(article.getAuthore());
 
         // image set later
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return articles.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView articleImage;
-        public TextView authore, description, title, date;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView articleImage;
+        TextView author, description, title, date;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            date = itemView.findViewById(R.id.news_row_date);
             articleImage = itemView.findViewById(R.id.news_row_newsImageId);
-            authore = itemView.findViewById(R.id.news_row_authorTitle);
-            description = itemView.findViewById(R.id.news_row_descriptionNews);
             title = itemView.findViewById(R.id.news_row_title);
-            date = itemView.findViewById(R.id.news_row_dateView);
+            author = itemView.findViewById(R.id.news_row_authorTitle);
+            description = itemView.findViewById(R.id.news_row_descriptionNews);
         }
     }
 }

@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.north.R;
-import com.example.north.data.Article;
+import com.example.north.model.Article;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,7 @@ public class ArticleAdaptor extends RecyclerView.Adapter<ArticleAdaptor.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ArticleAdaptor.ViewHolder viewHolder, int i) {
         Article article = articles.get(i);
-        
+
         viewHolder.title.setText(article.getTitle());
         viewHolder.description.setText(article.getDescription());
         viewHolder.date.setText(article.getPublishedDate());

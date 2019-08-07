@@ -16,14 +16,11 @@ public class AppController extends Application {
     public static synchronized AppController getInstance() {
         return mInstance;
     }
-    // just for testing
-    private AppController() {  }
 
     @Override
     public void onCreate() {
         super.onCreate();
-//        mInstance = this;
-        mInstance = new AppController();
+        mInstance = this;
     }
 
     public RequestQueue getmRequestQueue() {

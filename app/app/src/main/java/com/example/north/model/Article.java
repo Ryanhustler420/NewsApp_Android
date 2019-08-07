@@ -1,4 +1,4 @@
-package com.example.north.data;
+package com.example.north.model;
 
 public class Article {
     private String authore;

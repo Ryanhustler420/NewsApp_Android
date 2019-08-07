@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">North</string>
+    <string name="may_12_2019">May 12 2019</string>
+    <string name="rawimage">rawImage</string>
+    <string name="author_gaurav_gupta">Author: Gaurav Gupta</string>
 </resources>

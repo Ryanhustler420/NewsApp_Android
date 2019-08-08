@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.north.R;
 import com.example.north.model.Article;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,12 @@ public class ArticleAdaptor extends RecyclerView.Adapter<ArticleAdaptor.ViewHold
         viewHolder.author.setText(article.getAuthore());
 
         // image set later
+        Picasso.with(context)
+                .load(article.getImageUrl())
+                .placeholder(R.drawable.photoapp)
+                .resize(650, 400)
+                .into(viewHolder.articleImage);
+
     }
 
     @Override

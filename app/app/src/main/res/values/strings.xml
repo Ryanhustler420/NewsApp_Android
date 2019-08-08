@@ -3,4 +3,8 @@
     <string name="may_12_2019">May 12 2019</string>
     <string name="rawimage">rawImage</string>
     <string name="author_gaurav_gupta">Author: Gaurav Gupta</string>
+    <string name="topheading">Top Heading</string>
+    <string name="everything">Everything</string>
+    <string name="select_news_title">Select News</string>
+    <string name="meta">v1 1.0 GauravGupta</string>
 </resources>

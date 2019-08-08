@@ -1,13 +1,10 @@
 package com.example.north.data;
 
-import android.util.Log;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.north.controller.AppController;
-import com.example.north.misc.Config;
 import com.example.north.model.Article;
 
 import org.json.JSONArray;
@@ -19,8 +16,7 @@ import java.util.ArrayList;
 public class ArticleData {
     ArrayList<Article> articles = new ArrayList<>();
 
-    public void getNewsList(final ArticleListAsyncResponse callback) {
-        String url = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=" + Config.NEWS_API_KEY;
+    public void getNewsList(String url, final ArticleListAsyncResponse callback) {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -54,7 +50,7 @@ public class ArticleData {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                // fire dialog box with error message and maybe redirect back to Home Screen
             }
         });
 

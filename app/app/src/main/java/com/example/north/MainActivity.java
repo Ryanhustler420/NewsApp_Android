@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.north.data.ArticleData;
 import com.example.north.data.ArticleListAsyncResponse;
+import com.example.north.misc.Config;
 import com.example.north.model.Article;
 import com.example.north.util.ArticleAdaptor;
 
@@ -24,11 +25,17 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog dialog;
     private boolean online, isFetched;
     private Handler handler;
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null) {
+            type = bundle.getString("type");
+        }
 
         isFetched = false;
 
@@ -41,8 +48,20 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public void populateList() {
-        new ArticleData().getNewsList(new ArticleListAsyncResponse() {
+    public void populateList(String type) {
+        String url;
+        switch (type) {
+            case "top":
+                url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=" + Config.NEWS_API_KEY;
+                break;
+            case "everything":
+                url = "https://newsapi.org/v2/everything?domains=wsj.com,nytimes.com&apiKey=" + Config.NEWS_API_KEY;
+                break;
+            default:
+                url = "https://newsapi.org/v2/everything?domains=wsj.com,nytimes.com&apiKey=" + Config.NEWS_API_KEY;
+                break;
+        }
+        new ArticleData().getNewsList(url, new ArticleListAsyncResponse() {
             @Override
             public void processFinish(final ArrayList<Article> articles) {
                 recyclerView = findViewById(R.id.recyclerView);
@@ -87,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             if(online && !isFetched)
-                populateList();
+                populateList(type);
             else if (online)  {
                 if(dialog.isShowing()) dialog.dismiss();
             } else {

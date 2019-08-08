@@ -1,6 +1,7 @@
 package com.example.north;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     public void populateList() {
         new ArticleData().getNewsList(new ArticleListAsyncResponse() {
             @Override
-            public void processFinish(ArrayList<Article> articles) {
+            public void processFinish(final ArrayList<Article> articles) {
                 recyclerView = findViewById(R.id.recyclerView);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setItemViewCacheSize(20);
@@ -53,7 +54,13 @@ public class MainActivity extends AppCompatActivity {
                 articleAdaptor.setOnClickListener(new ArticleAdaptor.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Toast.makeText(getApplicationContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
+                        Article article = articles.get(position);
+
+                        Intent intent = new Intent(getApplicationContext(), NewsDetailActivity.class);
+                        intent.putExtra("url", article.getNewsUrl());
+
+                        startActivity(intent);
+                        // Toast.makeText(getApplicationContext(), article.getNewsUrl(), Toast.LENGTH_LONG).show();
                     }
                 });
                 // handler.removeCallbacks(updateData);

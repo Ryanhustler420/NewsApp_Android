@@ -48,6 +48,20 @@ public class ArticleAdaptor extends RecyclerView.Adapter<ArticleAdaptor.ViewHold
                 .resize(650, 400)
                 .into(viewHolder.articleImage);
 
+        // this could work but unfortunately it does'nt because images load's asynchronously which prevent this palette
+        // it fetch bitmap.
+        //        BitmapDrawable bitmapDrawable = (BitmapDrawable) viewHolder.articleImage.getDrawable();
+        //        if(bitmapDrawable != null) {
+        //            Bitmap photo = bitmapDrawable.getBitmap();
+        //            Palette.from(photo).generate(new Palette.PaletteAsyncListener() {
+        //                @Override
+        //                public void onGenerated(@Nullable Palette palette) {
+        //                    int bgColor = palette.getVibrantColor(ContextCompat.getColor(context, android.R.color.black));
+        //                    viewHolder.date.setBackgroundColor(bgColor);
+        //                }
+        //            });
+        //        }
+
     }
 
     @Override

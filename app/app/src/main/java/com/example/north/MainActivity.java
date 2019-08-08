@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 articleAdaptor = new ArticleAdaptor(articles, getApplicationContext());
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 recyclerView.setAdapter(articleAdaptor);
-                handler.removeCallbacks(updateData);
+                // handler.removeCallbacks(updateData);
                 if (dialog.isShowing()) dialog.dismiss();
                 isFetched = true;
             }
@@ -74,12 +74,17 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             if(online && !isFetched)
                 populateList();
-            else {
-                if(!dialog.isShowing()) dialog.show();
+            else if (online)  {
+                if(dialog.isShowing()) dialog.dismiss();
+            } else {
+                if(!dialog.isShowing()) {
+                    dialog.setMessage("Connecting...");
+                    dialog.show();
+                }
                 Toast.makeText(getApplicationContext(), "You are offline, Check Internet Connection" ,Toast.LENGTH_SHORT).show();
             }
             online = isOnline();
-            handler.postDelayed(updateData, 5000);
+            handler.postDelayed(updateData, 7000);
         }
     };
 

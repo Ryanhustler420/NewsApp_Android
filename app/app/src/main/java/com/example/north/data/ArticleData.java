@@ -20,7 +20,7 @@ public class ArticleData {
     ArrayList<Article> articles = new ArrayList<>();
 
     public void getNewsList(final ArticleListAsyncResponse callback) {
-        String url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=" + Config.NEWS_API_KEY;
+        String url = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=" + Config.NEWS_API_KEY;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

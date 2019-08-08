@@ -19,6 +19,9 @@ public class NewsDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_news_detail);
 
         progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
         webview = findViewById(R.id.news_detail_Webview);
         Bundle bundle = getIntent().getExtras();
 

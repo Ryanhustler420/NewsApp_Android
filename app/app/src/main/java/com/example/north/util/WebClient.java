@@ -13,13 +13,11 @@ public class WebClient extends WebViewClient {
     public WebClient(ProgressDialog progressDialog, Context context) {
         this.progressDialog = progressDialog;
         this.context = context;
-        progressDialog.setMessage("Loading");
     }
 
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         super.onPageStarted(view, url, favicon);
-        progressDialog.show();
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.north.R;
 import com.example.north.model.Article;
@@ -69,7 +70,7 @@ public class ArticleAdaptor extends RecyclerView.Adapter<ArticleAdaptor.ViewHold
         return articles.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView articleImage;
         TextView author, description, title, date;
 
@@ -81,6 +82,12 @@ public class ArticleAdaptor extends RecyclerView.Adapter<ArticleAdaptor.ViewHold
             title = itemView.findViewById(R.id.news_row_title);
             author = itemView.findViewById(R.id.news_row_authorTitle);
             description = itemView.findViewById(R.id.news_row_descriptionNews);
+            itemView.setOnClickListener(this); // our view has been registered for click event
+        }
+
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(context, "Hello world", Toast.LENGTH_LONG).show();
         }
     }
 }

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.north.data.ArticleData;
@@ -49,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
                 articleAdaptor = new ArticleAdaptor(articles, getApplicationContext());
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 recyclerView.setAdapter(articleAdaptor);
+                articleAdaptor.setOnClickListener(new ArticleAdaptor.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Toast.makeText(getApplicationContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
+                    }
+                });
                 // handler.removeCallbacks(updateData);
                 if (dialog.isShowing()) dialog.dismiss();
                 isFetched = true;

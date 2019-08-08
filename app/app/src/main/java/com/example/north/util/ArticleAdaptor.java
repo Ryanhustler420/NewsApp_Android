@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.north.R;
 import com.example.north.model.Article;
@@ -20,6 +19,7 @@ public class ArticleAdaptor extends RecyclerView.Adapter<ArticleAdaptor.ViewHold
 
     ArrayList<Article> articles = new ArrayList<>();
     Context context;
+    private OnItemClickListener itemClickListener;
 
     public ArticleAdaptor(ArrayList<Article> articles, Context context) {
         this.articles = articles;
@@ -49,25 +49,23 @@ public class ArticleAdaptor extends RecyclerView.Adapter<ArticleAdaptor.ViewHold
                 .resize(650, 400)
                 .into(viewHolder.articleImage);
 
-        // this could work but unfortunately it does'nt because images load's asynchronously which prevent this palette
-        // it fetch bitmap.
-        //        BitmapDrawable bitmapDrawable = (BitmapDrawable) viewHolder.articleImage.getDrawable();
-        //        if(bitmapDrawable != null) {
-        //            Bitmap photo = bitmapDrawable.getBitmap();
-        //            Palette.from(photo).generate(new Palette.PaletteAsyncListener() {
-        //                @Override
-        //                public void onGenerated(@Nullable Palette palette) {
-        //                    int bgColor = palette.getVibrantColor(ContextCompat.getColor(context, android.R.color.black));
-        //                    viewHolder.date.setBackgroundColor(bgColor);
-        //                }
-        //            });
-        //        }
-
     }
 
     @Override
     public int getItemCount() {
         return articles.size();
+    }
+
+    public void setOnClickListener(OnItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+        // will look like this at the end
+
+        //        this.itemClickListener = new ArticleAdaptor.OnItemClickListener() {
+        //            @Override
+        //            public void onItemClick(View view, int position) {
+        //
+        //            }
+        //        };
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -87,7 +85,11 @@ public class ArticleAdaptor extends RecyclerView.Adapter<ArticleAdaptor.ViewHold
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(context, "Hello world", Toast.LENGTH_LONG).show();
+            itemClickListener.onItemClick(view, getAdapterPosition());
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
     }
 }

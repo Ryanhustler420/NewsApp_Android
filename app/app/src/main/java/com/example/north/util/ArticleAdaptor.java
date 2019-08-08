@@ -38,7 +38,7 @@ public class ArticleAdaptor extends RecyclerView.Adapter<ArticleAdaptor.ViewHold
 
         viewHolder.title.setText(article.getTitle());
         viewHolder.description.setText(article.getDescription());
-        viewHolder.date.setText(article.getPublishedDate());
+        viewHolder.date.setText(Util.dateFormetted(article.getPublishedDate()));
         viewHolder.author.setText(article.getAuthore());
 
         // image set later
